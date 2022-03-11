@@ -62,7 +62,7 @@ public class Encryptor
         }
         else
         {
-          letterBlock[row][col] = "";
+          letterBlock[row][col] = "?";
         }
         counter++;
       }
@@ -91,9 +91,9 @@ public class Encryptor
   public String decryptBlock()
   {
     String returnStr = "";
-    for (int col = 0; col < numCols; col++)
+    for (int row = 0; row < numRows; row++)
     {
-      for (int row = 0; row < numRows; row++)
+      for (int col = 0; col < numCols; col++)
       {
         returnStr += letterBlock[row][col];
       }
@@ -147,7 +147,7 @@ public class Encryptor
    *                 initialized with the same number of rows and columns
    *                 as was used for the Encryptor object used for encryption. 
    *  
-   *   @param encryptedMessage  the encrypted message to decrypt
+   *   @param message the encrypted message to decrypt
    *
    *   @return  the decrypted, original message (which had been encrypted)
    *
@@ -155,9 +155,23 @@ public class Encryptor
    *        (e.g. a method to decrypt each section of the decrypted message,
    *         similar to how encryptBlock was used)
    */
-  public String decryptMessage(String encryptedMessage)
+  public String decryptMessage(String message)
   {
-    /* to be implemented in part (d) */
-    return "asd";
+    if (message.equals(""))
+    {
+      return "";
+    }
+    String returnStr = "";
+    for (int i = 0; i < message.length(); i += (numCols * numRows))
+    {
+      String tempMessage = "";
+          tempMessage = message.substring(i, i + (numCols * numRows));
+        decryptFillBlock(tempMessage);
+        tempMessage = decryptBlock();
+        returnStr += tempMessage;
+      }
+    String returnStrTempNoAs = returnStr.substring(returnStr.length() - (numRows * numCols), returnStr.length()).replace("A", "");
+    returnStr = returnStr.substring(0, returnStr.length() - (numRows * numCols)) + returnStrTempNoAs;
+      return returnStr;
   }
 }
