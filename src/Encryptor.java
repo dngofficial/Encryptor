@@ -5,7 +5,7 @@ public class Encryptor
   /** A two-dimensional array of single-character strings, instantiated in the constructor */
   private String[][] letterBlock;
 
-  /** The number of rows of letterBlock, set by the constructor */
+  /** The number of rows of f, set by the constructor */
   private int numRows;
 
   /** The number of columns of letterBlock, set by the constructor */
